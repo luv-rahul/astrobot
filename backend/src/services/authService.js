@@ -32,6 +32,7 @@ const signup = async ({
     const token = jwt.sign(
       { _id: user._id },
       process.env.JSON_WEB_TOKEN_SECRET_KEY,
+      { expiresIn: "1h" },
     );
 
     return { user, token };
@@ -59,6 +60,7 @@ const login = async (emailId, password) => {
     const token = jwt.sign(
       { _id: user._id },
       process.env.JSON_WEB_TOKEN_SECRET_KEY,
+      { expiresIn: "1h" },
     );
 
     return { user, token };
@@ -66,8 +68,5 @@ const login = async (emailId, password) => {
     throw new Error("Login Failed: " + err.message);
   }
 };
-const logout = async (req, res) => {
-  res.cookie("token", "", { expires: new Date(0) });
-};
 
-module.exports = { signup, login, logout };
+module.exports = { signup, login };

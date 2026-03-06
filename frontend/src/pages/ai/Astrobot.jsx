@@ -20,12 +20,21 @@ const AstrobotPage = () => {
           <p className="italic text-xs opacity-70">
             "Where AI meets the stars."
           </p>
-          <Link
-            to="/ai/chat"
-            className="inline-flex items-center justify-center bg-[#C8191C] text-white font-medium text-sm px-4 py-2 w-auto sm:w-1/3 lg:w-1/3 hover:bg-red-500"
-          >
-            Chat with AI
-          </Link>
+          <div className="flex gap-4 w-full">
+            <Link
+              to="/dashboard"
+              className="flex-1 flex items-center justify-center bg-[#555] text-white font-medium text-sm px-4 py-2 hover:bg-[#222] transition"
+            >
+              Dashboard
+            </Link>
+
+            <Link
+              to="/ai/chat"
+              className="flex-1 flex items-center justify-center bg-[#C8191C] text-white font-medium text-sm px-4 py-2 hover:bg-red-500 transition"
+            >
+              Chat with AI
+            </Link>
+          </div>
         </div>
         <div className="w-2/3 sm:w-1/2 flex justify-center">
           <img

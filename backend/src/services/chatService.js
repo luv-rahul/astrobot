@@ -1,10 +1,8 @@
 const ai = require("../utils/gemini");
-
 const Chat = require("../models/chat");
 
 const handleGptSearchClick = async (userData, query) => {
-
-const gptQuery = `
+  const gptQuery = `
 You are a professional Astrologer. Using your knowledge and the latest publicly available information (up to today), provide accurate guidance. 
 Please consider the user's personal details carefully and respond in a clear, friendly way.
 
@@ -21,6 +19,7 @@ Instructions:
 2. If the question is time-sensitive, consider events of the current day, week, or month.
 3. Give practical advice and actionable suggestions.
 4. Keep your answer concise, informative, and in natural language.
+5. Give response in bullet-points and formatted structure.
 `;
 
   const response = await ai.models.generateContent({
@@ -62,4 +61,22 @@ Instructions:
   return data;
 };
 
-module.exports = { handleGptSearchClick };
+const getChatHistory = async (userId) => {
+  try {
+    const chatDoc = await Chat.findOne({ userId });
+
+    if (!chatDoc) {
+      return { message: "No chat history found." };
+    }
+
+    return chatDoc.conversations.map((conversation) => ({
+      title: conversation.title,
+      messages: conversation.messages,
+    }));
+  } catch (error) {
+    console.error("Error fetching chat history:", error);
+    throw new Error("Unable to fetch chat history. Please try again.");
+  }
+};
+
+module.exports = { handleGptSearchClick,getChatHistory };

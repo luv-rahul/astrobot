@@ -79,8 +79,14 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  const user = authService.logout();
-  res.status(200).json({ status: 200, message: "Logout Successfully!" });
+  try {
+    res.cookie("token", "", {
+      expires: new Date(0),
+    });
+    res.status(200).json({ status: 200, message: "Logged out successfully!" });
+  } catch (err) {
+    res.status(500).json({ message: "Logout failed" });
+  }
 };
 
 module.exports = { signup, login, logout };

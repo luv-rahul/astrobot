@@ -3,7 +3,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 
 const Auth = () => {
-  const [isLoginForm, setIsLoginForm] = useState(false);
+  const [isLoginForm, setIsLoginForm] = useState(true);
   const heading = isLoginForm ? "Login" : "Signup";
   const questionText = isLoginForm ? "New User?" : "Already have an account?";
   const toggleText = isLoginForm ? "Signup" : "Login";

@@ -31,7 +31,6 @@ const Login = () => {
       try {
         const result = await login(values).unwrap();
         if (result.status === 200) {
-          console.log(result);
           toast.success("Login successful!");
           navigate("/ai");
         } else {

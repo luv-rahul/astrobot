@@ -9,7 +9,7 @@ const ChatScreen = () => {
     { sender: "bot", text: "Hello! How can I help you today? 🔮" },
   ]);
   const [isBotLoading, setIsBotLoading] = useState(false);
-  const [sendMessage, { isLoading: isSending }] = useSendMessageMutation();
+  const [sendMessage] = useSendMessageMutation();
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ const ChatScreen = () => {
         ]);
         setIsBotLoading(true);
         const result = await sendMessage(values.message).unwrap();
+        console.log(result);
         setMessages((prev) => [
           ...prev,
           { sender: "bot", text: result.message },
@@ -76,7 +77,7 @@ const ChatScreen = () => {
           />
           <button
             type="submit"
-            disabled={isSending}
+            disabled={isBotLoading}
             className="bg-[#C8191C] px-4 py-2 cursor-pointer hover:bg-[#b05253]"
           >
             Send

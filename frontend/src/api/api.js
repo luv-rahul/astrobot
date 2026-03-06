@@ -1,29 +1,27 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { baseQueryWithAuth } from "./baseQuery";
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4000/auth",
-    credentials: "include",
-  }),
+  baseQuery: baseQueryWithAuth,
   endpoints: (build) => ({
     signup: build.mutation({
       query: (userData) => ({
-        url: "/signup",
+        url: "/auth/signup",
         method: "POST",
         body: userData,
       }),
     }),
     login: build.mutation({
       query: (credentials) => ({
-        url: "/login",
+        url: "/auth/login",
         method: "POST",
         body: credentials,
       }),
     }),
     logout: build.mutation({
       query: () => ({
-        url: "/logout",
+        url: "/auth/logout",
         method: "POST",
       }),
     }),
@@ -35,21 +33,36 @@ export const { useSignupMutation, useLoginMutation, useLogoutMutation } =
 
 export const chatApi = createApi({
   reducerPath: "chatApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4000/ai",
-    credentials: "include",
-  }),
+  baseQuery: baseQueryWithAuth,
   endpoints: (build) => ({
     sendMessage: build.mutation({
       query: (query) => ({
-        url: "/chat",
+        url: "/ai/chat",
         method: "POST",
         body: { query },
       }),
     }),
     getHistory: build.query({
-      query: () => "/history",
+      query: () => "/ai/history",
     }),
   }),
 });
 export const { useSendMessageMutation, useGetHistoryQuery } = chatApi;
+
+export const userApi = createApi({
+  reducerPath: "userApi",
+  baseQuery: baseQueryWithAuth,
+  endpoints: (build) => ({
+    updateProfile: build.mutation({
+      query: (userData) => ({
+        url: "/user/profile",
+        method: "PATCH",
+        body: userData,
+      }),
+    }),
+    getProfile: build.query({
+      query: () => "/user/profile",
+    }),
+  }),
+});
+export const { useUpdateProfileMutation, useGetProfileQuery } = userApi;

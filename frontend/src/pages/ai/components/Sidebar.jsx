@@ -1,4 +1,34 @@
+import { useGetHistoryQuery } from "../../../api/api";
+
 const Sidebar = () => {
+  const { data: history, isLoading, isError } = useGetHistoryQuery();
+
+  if (isLoading) {
+    return (
+      <div className="w-1/5 h-screen border-r border-white/20 p-4 flex flex-col bg-[#0f0f0f]">
+        <h1 className="text-lg font-semibold pb-3 border-b border-white/20">
+          🔮 AstroBot
+        </h1>
+        <div className="mt-4 text-center text-gray-500">
+          Loading chat history...
+        </div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="w-1/5 h-screen border-r border-white/20 p-4 flex flex-col bg-[#0f0f0f]">
+        <h1 className="text-lg font-semibold pb-3 border-b border-white/20">
+          🔮 AstroBot
+        </h1>
+        <div className="mt-4 text-center text-red-500">
+          Failed to load chat history. Please try again later.
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-1/5 h-screen border-r border-white/20 p-4 flex flex-col bg-[#0f0f0f]">
       <h1 className="text-lg font-semibold pb-3 border-b border-white/20">
@@ -15,14 +45,21 @@ const Sidebar = () => {
         </h2>
 
         <div className="flex flex-col gap-1 overflow-y-auto pr-1 sidebar-scroll">
-          {Array.from({ length: 15 }).map((_, i) => (
-            <div
-              key={i}
-              className="text-sm px-3 py-2 rounded-md cursor-pointer hover:bg-white/10 transition"
-            >
-              Chat Title {i + 1}
+          {history && history?.message?.length > 0 ? (
+            history.message.map((chat, index) => (
+              <div
+                key={index}
+                className="text-sm px-3 py-2 border-b border-[#222] cursor-pointer hover:bg-white/10 transition "
+              >
+                {chat.title || `Chat Title ${index + 1}`}{" "}
+                {/* Display chat title */}
+              </div>
+            ))
+          ) : (
+            <div className="text-sm text-gray-500 px-3 py-2">
+              No chat history available
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>

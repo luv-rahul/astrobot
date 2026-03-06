@@ -11,4 +11,14 @@ const searchQuery = async (req, res) => {
   }
 };
 
-module.exports = { searchQuery };
+const getHistory = async (req, res) => {
+  try {
+    const { _id } = req.user;
+    const data = await chatService.getChatHistory(_id);
+    res.status(200).json({ status: 200, message: data });
+  } catch (error) {
+    res.status(500).json({ status: 500, message: "Something went wrong!" });
+  }
+};
+
+module.exports = { searchQuery, getHistory };
