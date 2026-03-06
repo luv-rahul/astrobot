@@ -150,7 +150,7 @@ const Signup = () => {
             className="border border-white py-1 px-2"
             type="text"
             name="birthTime"
-            placeholder="02:30 pm"
+            placeholder="2:30 pm"
             value={formik.values.birthTime || ""}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}

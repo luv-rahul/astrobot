@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { useSendMessageMutation } from "../../../api/api";
 import ChatHeader from "./ChatHeader";
+import BotMessage from "./BotMessage";
 
 const ChatScreen = () => {
   const [messages, setMessages] = useState([
@@ -27,10 +28,9 @@ const ChatScreen = () => {
         ]);
         setIsBotLoading(true);
         const result = await sendMessage(values.message).unwrap();
-        console.log(result);
         setMessages((prev) => [
           ...prev,
-          { sender: "bot", text: result.message },
+          { sender: "bot", data: result.message },
         ]);
         setIsBotLoading(false);
       } catch (err) {
@@ -48,15 +48,20 @@ const ChatScreen = () => {
         {messages.map((msg, index) => (
           <div
             key={index}
-            className={`px-4 py-2 max-w-xs wrap-break-words rounded ${
+            className={`px-4 py-2 rounded ${
               msg.sender === "user"
-                ? "self-end bg-[#C8191C] text-white"
-                : "self-start bg-[#1f1f1f] text-gray-200"
+                ? "self-end bg-[#C8191C] text-white max-w-xs wrap-break-words"
+                : "self-start bg-[#1f1f1f] text-gray-200 w-full max-w-2xl"
             }`}
           >
-            {msg.text}
+            {msg.sender === "user" ? (
+              msg.text
+            ) : (
+              <BotMessage data={msg.data ?? msg.text} />
+            )}
           </div>
         ))}
+
         {isBotLoading && (
           <div className="self-start bg-[#1f1f1f] text-gray-200 px-4 py-2 max-w-xs rounded">
             <span>Loading...</span>

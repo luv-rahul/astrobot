@@ -35,10 +35,6 @@ const Sidebar = () => {
         🔮 AstroBot
       </h1>
 
-      <button className="mt-4 bg-[#C8191C] py-2 text-sm cursor-pointer hover:opacity-90 transition">
-        + New Chat
-      </button>
-
       <div className="mt-5 flex flex-col flex-1 overflow-hidden">
         <h2 className="text-xs text-gray-400 mb-2 uppercase tracking-wider">
           Chat History

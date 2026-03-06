@@ -3,10 +3,12 @@ const chatService = require("../services/chatService");
 const searchQuery = async (req, res) => {
   try {
     const { query } = req.body;
-    const userData = ({ fullName, dob, birthTime, birthPlace } = req.user);
+    const { fullName, dob, birthTime, birthPlace, _id } = req.user; 
+    const userData = { fullName, dob, birthTime, birthPlace, _id };
     const data = await chatService.handleGptSearchClick(userData, query);
     res.status(200).json({ status: 200, message: data });
   } catch (error) {
+    console.error(error); // add this to see the real error
     res.status(500).json({ status: 500, message: "Something went wrong!" });
   }
 };
