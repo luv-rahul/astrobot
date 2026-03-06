@@ -7,6 +7,7 @@ import Chat from "../pages/ai/Chat";
 import ProtectedRoute from "../components/ProtectedRoute";
 import AuthRoute from "../components/AuthRoute";
 import Profile from "../pages/dashboard/Profile";
+import ErrorPage from "../components/ErrorPage";
 
 const appRouter = createBrowserRouter([
   {
@@ -47,6 +48,7 @@ const appRouter = createBrowserRouter([
         ),
       },
     ],
+    errorElement: <ErrorPage />,
   },
 ]);
 
