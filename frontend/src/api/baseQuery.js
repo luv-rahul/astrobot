@@ -1,8 +1,10 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { toast } from "react-toastify";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:4000",
+  baseUrl: API_URL,
   credentials: "include",
 });
 
@@ -15,7 +17,7 @@ export const baseQueryWithAuth = async (args, api, extraOptions) => {
     isLoggingOut = true;
 
     try {
-      await fetch("http://localhost:4000/auth/logout", {
+      await fetch(`${API_URL}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

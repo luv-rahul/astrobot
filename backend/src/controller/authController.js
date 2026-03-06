@@ -38,6 +38,9 @@ const signup = async (req, res) => {
 
       res.cookie("token", token, {
         expires: new Date(Date.now() + 8 * 3600000),
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
       });
 
       res
@@ -67,6 +70,9 @@ const login = async (req, res) => {
 
       res.cookie("token", token, {
         expires: new Date(Date.now() + 8 * 3600000),
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
       });
 
       res
@@ -82,6 +88,9 @@ const logout = async (req, res) => {
   try {
     res.cookie("token", "", {
       expires: new Date(0),
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
     });
     res.status(200).json({ status: 200, message: "Logged out successfully!" });
   } catch (err) {
