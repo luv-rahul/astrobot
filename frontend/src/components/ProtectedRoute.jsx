@@ -1,13 +1,9 @@
 import { Navigate } from "react-router-dom";
 
-const getTokenFromCookie = () => {
-  return document.cookie.includes("token=");
-};
-
 const ProtectedRoute = ({ children }) => {
-  const storedToken = getTokenFromCookie();
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-  if (!storedToken) {
+  if (!isLoggedIn) {
     return <Navigate to="/auth" replace />;
   }
 

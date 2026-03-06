@@ -60,6 +60,7 @@ const Signup = () => {
         if (result.status === 200) {
           console.log(result);
           toast.success("Signup successful!");
+          localStorage.setItem("isLoggedIn", "true");
           navigate("/ai");
         } else {
           toast.error("Signup failed!");

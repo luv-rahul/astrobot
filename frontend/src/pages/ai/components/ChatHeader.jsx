@@ -11,6 +11,7 @@ const ChatHeader = () => {
       const result = await logout().unwrap();
       if (result.status === 200) {
         toast.success("Logout Successful!");
+        localStorage.removeItem("isLoggedIn");
         navigate("/");
       } else {
         toast.error("Something went wrong!");

@@ -32,6 +32,7 @@ const Login = () => {
         const result = await login(values).unwrap();
         if (result.status === 200) {
           toast.success("Login successful!");
+          localStorage.setItem("isLoggedIn", "true");
           navigate("/ai");
         } else {
           toast.error("Login failed!");
