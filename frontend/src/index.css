@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+* {
+  font-family: montserrat;
+}
+
+/* Thin Scrollbar */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}

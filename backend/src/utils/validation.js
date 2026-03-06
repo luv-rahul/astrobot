@@ -5,8 +5,8 @@ const isFullNameValid = (fullName) => {
 
   fullName = fullName.trim();
 
-  if (fullName.length < 4 || fullName.length > 20) {
-    throw new Error("Full Name must be 4-20 characters long");
+  if (fullName.length < 4 || fullName.length > 25) {
+    throw new Error("Full Name must be 4-25 characters long");
   }
 
   return true;
