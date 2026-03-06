@@ -66,8 +66,8 @@ const login = async (emailId, password) => {
     throw new Error("Login Failed: " + err.message);
   }
 };
-const logout = async (req,res) => {
-  res.cookie("token", null, { expires: new Date(Date.now()) });
+const logout = async (req, res) => {
+  res.cookie("token", "", { expires: new Date(0) });
 };
 
 module.exports = { signup, login, logout };

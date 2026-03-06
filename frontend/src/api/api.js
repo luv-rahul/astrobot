@@ -41,10 +41,10 @@ export const chatApi = createApi({
   }),
   endpoints: (build) => ({
     sendMessage: build.mutation({
-      query: (message) => ({
+      query: (query) => ({
         url: "/chat",
         method: "POST",
-        body: { message },
+        body: { query },
       }),
     }),
     getHistory: build.query({
