@@ -1,18 +1,14 @@
 const BotMessage = ({ data }) => {
-  // If it's a plain string, render as-is
   if (typeof data === "string") {
     return <p className="text-gray-200 text-xs">{data}</p>;
   }
 
-  // Structured astrology response
   return (
     <div className="flex flex-col gap-3 text-xs text-gray-200">
-      {/* Summary */}
       {data.summary && (
         <p className="text-gray-100 leading-relaxed">{data.summary}</p>
       )}
 
-      {/* Cards: Career, Finance, Love, Health */}
       <div className="grid grid-cols-2 gap-2">
         {[
           { key: "career", label: "💼 Career", color: "border-blue-500" },
@@ -33,7 +29,6 @@ const BotMessage = ({ data }) => {
         )}
       </div>
 
-      {/* Advice */}
       {data.advice?.length > 0 && (
         <div className="bg-[#2a2a2a] rounded p-2">
           <p className="font-semibold text-white mb-1">📌 Advice</p>
@@ -47,7 +42,6 @@ const BotMessage = ({ data }) => {
         </div>
       )}
 
-      {/* Important Dates */}
       {data.important_dates?.length > 0 && (
         <div className="bg-[#2a2a2a] rounded p-2">
           <p className="font-semibold text-white mb-1">📅 Important Dates</p>

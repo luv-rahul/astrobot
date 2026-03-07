@@ -29,13 +29,15 @@ const signup = async ({
 
     await user.save();
 
+    const safeUser = await User.findById(user._id).select("-password -emailId");
+
     const token = jwt.sign(
       { _id: user._id },
       process.env.JSON_WEB_TOKEN_SECRET_KEY,
       { expiresIn: "1h" },
     );
 
-    return { user, token };
+    return { user: safeUser, token };
   } catch (err) {
     throw new Error("Signup Failed: " + err.message);
   }
@@ -43,7 +45,7 @@ const signup = async ({
 
 const login = async (emailId, password) => {
   try {
-    const user = await User.findOne({ emailId: emailId });
+    const user = await User.findOne({ emailId: emailId }).select("+password");
 
     if (!user) {
       throw new Error("Invalid EmailId or Password");
@@ -57,13 +59,15 @@ const login = async (emailId, password) => {
       throw new Error("Invalid EmailId or Password");
     }
 
+    const safeUser = await User.findById(user._id).select("-password -emailId");
+
     const token = jwt.sign(
       { _id: user._id },
       process.env.JSON_WEB_TOKEN_SECRET_KEY,
       { expiresIn: "1h" },
     );
 
-    return { user, token };
+    return { user: safeUser, token };
   } catch (err) {
     throw new Error("Login Failed: " + err.message);
   }
